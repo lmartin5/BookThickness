@@ -16,6 +16,7 @@ my_graph = SimpleGraph(edge_set)
 
 import copy
 import itertools
+import BookThickness.BookThickness as BookThickness
 
 class SimpleGraph():
 
@@ -91,8 +92,48 @@ class SimpleGraph():
             pretty_print += "{" + str(edge[0]) + ", " + str(edge[1]) + "}, "
         pretty_print += "\b\b}"
         return pretty_print
+    
+    def find_n_page_embedding(self, n=1, spine=None):
+        # spine can be either None, a single permutation of the vertices, or a list of permutations of the vertices
+        # i.e. spine=[1, 2, 4, 5, 3] for a graph with 5 vertices
+        if (type(n) is not int) or (n < 0):
+            raise Exception("The number of pages must be an integer >= 0.")
+
+        if spine is not None:
+            if (type(spine) is not list):
+                raise Exception("The spine must be either a single permutation or a list of permutations (ex. [1, 3, 2]).")
+            elif (len(spine) is 0) and (self.num_vertices is not 0):
+                raise Exception("Given spine cannot be an empty list.")
+            elif (len(spine) is 0) and (self.num_vertices is 0):
+                pass
+            elif (type(spine[0]) is list):
+                # list of spines
+                for spine_perm in spine:
+                    self.validate_spine(spine_perm)
+            else:
+                # single spine
+                self.validate_spine(spine)
+                spine = [spine]
+
+        book_embedding = BookThickness.find_n_page_embedding(n, self.edges, spine)
+
+        if book_embedding is -1:
+            print("Graph is not embeddable in an " + str(n) + "-page book.")
+        else:
+            print("Graph is embeddable in an " + str(n) + "-page book.")
+        return book_embedding
+            
+    def validate_spine(self, spine):
+        if (len(spine) is not self.num_vertices):
+            raise Exception("The length of the spine must equal the number of vertices.")
+        for vert in self.vertices:
+            if (vert not in spine):
+                raise Exception("Each vertex must appear exactly once in the spine.")
 
     def complete_graph(n):
+        if (type(n) is not int) or (n < 0):
+            raise Exception("The complete graph requires an integer >= 0.")    
+
         edge_set = []
         verts = list(range(1, n + 1))
         for element in itertools.product(verts, verts):
@@ -102,6 +143,9 @@ class SimpleGraph():
         return SimpleGraph(edge_set)
 
     def complete_bipartite_graph(n, m):
+        if (type(n) is not int) or (n < 0) or (type(m) is not int) or (m < 0):
+            raise Exception("The complete bipartite graph requires two integers >= 0.")
+
         edge_set = []
         set_a = list(range(1, n + 1))
         set_b = list(range(n + 1, n + m + 1))
@@ -109,4 +153,3 @@ class SimpleGraph():
             edge_set.append(element)
 
         return SimpleGraph(edge_set)
-    
