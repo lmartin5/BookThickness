@@ -24,4 +24,9 @@ def main():
     embedding = graph_b.find_n_page_embedding(3, spine)
     print(embedding)
 
+    # examples of searching for the smallest book embedding, and hence finding book thickness
+    # bt(K6) = 3
+    embedding = graph_b.find_book_embedding()
+    print(embedding)
+
 main()

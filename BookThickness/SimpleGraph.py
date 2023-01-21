@@ -92,6 +92,19 @@ class SimpleGraph():
             pretty_print += "{" + str(edge[0]) + ", " + str(edge[1]) + "}, "
         pretty_print += "\b\b}"
         return pretty_print
+
+    def find_book_embedding(self, n=1):
+        # n gives the smallest page number to start searching (i.e. if a complete graph is known to be a subgraph)
+        if (type(n) is not int) or (n < 0):
+            raise Exception("The number of pages must be an integer >= 0.")
+
+        book_embedding = BookThickness.find_book_embedding(n, self.edges)
+
+        if book_embedding is -1:
+            print("Graph is not embeddable in an " + str(n) + "-page book.")
+        else:
+            print("Graph is embeddable in an " + str(n) + "-page book.")
+        return book_embedding
     
     def find_n_page_embedding(self, n=1, spine=None):
         # spine can be either None, a single permutation of the vertices, or a list of permutations of the vertices

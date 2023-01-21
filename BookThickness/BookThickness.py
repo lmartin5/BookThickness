@@ -8,6 +8,7 @@ embedding once it finds it.
 """
 
 import copy
+import BookThickness.Permutations as Perms
 
 class BookEmbedding():
 
@@ -165,16 +166,23 @@ class BookEmbedding():
         graph2 = copy.deepcopy(self)
         return graph2
 
-def find_book_embedding(n, edges, spines):
-    if spines == None:
-        # create permutations
-        pass
+def find_book_embedding(n, edges):
+    highest_vertex_number = 0
+    for edge in edges:
+        if edge[0] > highest_vertex_number:
+            highest_vertex_number = edge[0]
+        if edge[1] > highest_vertex_number:
+            highest_vertex_number = edge[1]
+    num_vertices = highest_vertex_number
+    spines = Perms.get_spines(num_vertices)
+    for spine in spines:
+        print(str(spine) + "\n")
     
     counter = 0
     num_perms = len(spines)
     backspaces = ""
 
-    num_pages = 1
+    num_pages = n
     while (True):
         print("Testing for " + str(num_pages) + "-page embeddings...")
 
