@@ -19,11 +19,11 @@ This README.md file contains basic information about this project and instructio
 
 ## Description
 
-The files contained in this repository were used to assist in finding $n$-page embeddings of graphs . The theorem appears in the article "On the Book Thickness of Total Graphs of Commutative Rings" which has the following abstract
+The files contained in this repository were used to assist in finding $n$-page embeddings of graphs . The theorem it was used for appears in the article "On the Book Thickness of Total Graphs of Commutative Rings" which has the following abstract
 
  >Let $R$ be a finite commutative ring with non-zero unity. The total graph of $R$, $T_\Gamma(R)$, is the simple, undirected graph with all elements of $R$ as vertices and two vertices, $x$ and $y$, adjacent if $x + y$ is a zero divisor of $R$. We classify all of the rings whose total graphs have low book thickness. We then show that there are only a finite number of rings for arbitrarily large book thicknesses.
 
- The main result from the paper...
+ The main result from the paper involves finding the book thickness of graphs that are induced from commutative rings. This code can serach for valid book embeddings for various $n$-books across the space of possible vertex spine orderings. Because the number of possible orderings grows at a factorial rate, this code only works well for graphs of 11 vertices or less. Book embeddings are found in a somewhat naive manner, and future work could be done to improve the efficiency of the algorithm. 
 
 ## Requirements
 
