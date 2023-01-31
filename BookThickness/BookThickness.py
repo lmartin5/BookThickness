@@ -48,7 +48,7 @@ class BookEmbedding():
         pretty_print += "\nEmbedding Possibility Remaining: " + str(self.is_possible_to_embedd())
         pretty_print += "\nEdges Added: " + str(len(self.addedEdges))
         for edge in self.addedEdges:
-            pretty_print += "\n\t" + str(edge)
+            pretty_print += "\n\tEdge: " + str(edge[0]) + ", Page Num: " + str(edge[1])
         pretty_print += "\nRemaining Edges to Add: " + str(len(self.remaining_edges))
         for edge in self.remaining_edges:
             pretty_print += "\n\t" + str(edge)
@@ -175,8 +175,6 @@ def find_book_embedding(n, edges):
             highest_vertex_number = edge[1]
     num_vertices = highest_vertex_number
     spines = Perms.get_spines(num_vertices)
-    for spine in spines:
-        print(str(spine) + "\n")
     
     counter = 0
     num_perms = len(spines)
@@ -227,7 +225,8 @@ def find_n_page_embedding(n, edges, spines):
         else:
             print()
             return graph
-
+    
+    print()
     return -1
 
 def find_n_page_embedding_with_spine(n, edges, spine):

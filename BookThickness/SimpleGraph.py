@@ -100,10 +100,7 @@ class SimpleGraph():
 
         book_embedding = BookThickness.find_book_embedding(n, self.edges)
 
-        if book_embedding is -1:
-            print("Graph is not embeddable in an " + str(n) + "-page book.")
-        else:
-            print("Graph is embeddable in an " + str(n) + "-page book.")
+        print("Graph is embeddable in a " + str(book_embedding.numPages) + "-page book.")
         return book_embedding
     
     def find_n_page_embedding(self, n=1, spine=None):
