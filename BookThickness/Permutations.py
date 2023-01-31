@@ -86,7 +86,7 @@ def toString(List):
 # 3. Ending index of the string.
 def generate_perm(a, l, r, perms):
     if l==r:
-        perms.append(perms)
+        perms.append(a.copy())
     else:
         for i in range(l,r+1):
             a[l], a[i] = a[i], a[l]
@@ -104,6 +104,9 @@ def generate_permutations(num_elements, perms):
 
     n = len(string)
     a = list(string)
+
+    print(n)
+    print(a)
     generate_perm(a, 0, n-1, perms)
 
 def strings_to_perms(perms):
@@ -155,3 +158,7 @@ def store_perms_in_dict(perms):
     for perm in perms:
         new_perms[perm] = perm
     return new_perms
+
+perms = []
+generate_permutations(4, perms)
+print(perms)
